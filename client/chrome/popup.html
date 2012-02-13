@@ -1,0 +1,17 @@
+<html>
+ <head>
+  <title>SemSurf</title>
+  <script type="text/javascript">
+		function process(p){
+			chrome.extension.sendRequest({do: p});		
+		}
+  </script>
+ </head>
+ <body>
+  <input type="button" value="Test Server" onclick="process('test')"></input>
+  <input type="button" value="Update Server" onclick="process('send')"></input>
+  <input type="button" value="Print Values" onclick="process('audit')"></input>
+  <input type="button" value="Purge Values" onclick="process('purge')"></input>
+ </body>
+</html>
+
