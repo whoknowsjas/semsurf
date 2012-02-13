@@ -1,0 +1,33 @@
+subprojects {
+	apply plugin: 'eclipse-wtp'
+}
+
+project(':server') {
+	apply plugin: 'war'
+	apply plugin: 'jetty'
+	
+	repositories {
+	    mavenCentral()
+	    maven {
+	        url "http://maven.springframework.org/milestone"
+	    }
+	}
+	
+	dependencies {
+			runtime	'org.codehaus.jackson:jackson-mapper-asl:1.8.3'
+			compile 'org.springframework:spring-webmvc:3.1.0.RELEASE',                       
+							'org.springframework.data:spring-data-neo4j:2.0.0.RELEASE',            
+							'ch.qos.logback:logback-classic:1.0.0',
+							'commons-lang:commons-lang:2.5',
+							'org.neo4j:neo4j:1.6.M03',
+							'com.hazelcast:hazelcast-all:1.9.4.6',
+							'org.hibernate:hibernate-validator:4.2.0.Final'            
+			testCompile  'org.springframework:spring-test:3.1.0.RELEASE',
+										'junit:junit:4.10'
+		           
+	}
+	
+	test {
+		testLogging.showStandardStreams = true
+	}
+}
