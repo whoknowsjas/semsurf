@@ -1,0 +1,20 @@
+<html>
+ <head>
+  <title>SemSurf - Future of Websurfing</title>
+  <script type="text/javascript">
+	
+		function process(p){
+			chrome.extension.sendRequest({do: p});		
+		}
+  </script>
+ </head>
+ <body>
+ <input type="button" value="Test Server" onclick="process('test')"></input>
+ <input type="button" value="Validate Post" onclick="process('validate')"></input>
+  <input type="button" value="Update Server" onclick="process('send')"></input>
+  <input type="button" value="Print Values" onclick="process('audit')"></input>
+  <input type="button" value="Purge Values" onclick="process('purge')"></input>
+  <input type="button" value="Find Values" onclick="process('find_all')"></input>
+ </body>
+</html>
+
