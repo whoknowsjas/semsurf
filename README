@@ -1,6 +1,12 @@
 git init
+
+#Initial
 touch README
 git add README
 git commit -m '?????'
 	git remote add origin git@github.com:whoknowsjas/semsurf.git
 git push -u origin master
+
+#Existing
+git remote add original https://github.com/<original user>/<original project>.git
+git pull original master
