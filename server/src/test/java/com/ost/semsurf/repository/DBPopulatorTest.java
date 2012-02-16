@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ost.semsurf.model.Page;
-import com.ost.semsurf.model.User;
+import com.ost.semsurf.domain.Page;
+import com.ost.semsurf.domain.User;
 
 @ContextConfiguration(locations = "classpath:test-spring-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,15 +30,19 @@ public class DBPopulatorTest {
 	DBPopulator repository;
 
 	Page page;
+	User user;
 
 	@Before
 	public void setup() {
 		page = new Page("test.com", null);
+		user = new User("J");
+		user.getPages().add(page);
+		
 	}
 
 	@Test
-	public void testPopulateDatabase() {
-		repository.populateDatabase(page);
+	public void testPopulateDatabase() {		
+		repository.populateDatabase(user);
 	}
 
 	@Test
@@ -46,7 +50,7 @@ public class DBPopulatorTest {
 		assertTrue(true);
 	}
 
-	@Test
+//	@Test
 	public void createUser() {
 		GraphDatabaseService repository = new EmbeddedGraphDatabase("build/test-db3");
 		String userName = "Jayson";

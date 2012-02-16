@@ -22,7 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.transaction.annotation.Transactional;
-import com.ost.semsurf.model.Page;
+
+import com.ost.semsurf.domain.Page;
 
 @ContextConfiguration(locations = "classpath:test-spring-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

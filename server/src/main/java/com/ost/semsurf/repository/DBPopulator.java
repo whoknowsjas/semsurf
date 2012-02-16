@@ -16,31 +16,31 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ost.semsurf.model.Page;
-import com.ost.semsurf.model.User;
+import com.ost.semsurf.domain.Page;
+import com.ost.semsurf.domain.User;
 
 @Transactional
-@Repository
+@Service
 public class DBPopulator {
 	
 	static Logger log = LoggerFactory.getLogger(DBPopulator.class);
 
 //	GraphDatabaseService repository = new EmbeddedGraphDatabase("target/test-db3");
-	@Autowired UserRepository repository;
+	@Autowired GraphRepository repository;
 		
 	public void populateDatabase(Page page) {
 		log.debug("URL: "+page.getUrl());
-		User user = createUser();
-//		repository.save(new User(userName));
-////		final User user = repository.findByPropertyValue("userName", "Jayson");
-//		System.out.println("nameIndex: "+user.getSys_id());
-		//User user = repository.("userName", userName, User.class);
-				
+//		User user = createUser();				
+	}
+	
+	public void populateDatabase(User user) {
+		log.debug("USERNAME: "+user.getUserName());
+		createUser(user);				
 	}
 
-	private User createUser() {
-		String userName = "Jayson";
-		User user = repository.findByPropertyValue("userName", userName);
+	private User createUser(User user) {
+		String userName = user.getUserName();
+		user = repository.findByPropertyValue("userName", userName);
 		boolean isExistingUser = (user!=null);
 		log.debug("isExisting User: "+isExistingUser);
 		if(!isExistingUser){
@@ -50,6 +50,34 @@ public class DBPopulator {
 		}
 		return user;
 	}
+	
+//	private void createUser(User user2) {
+//		GraphDatabaseService repository = new EmbeddedGraphDatabase("build/test-db3");
+//		Index<Node> nodeIndex = repository.index().forNodes("nodes");
+//		Transaction tx = repository.beginTx();
+//		try {
+//			
+//			String userNm = user2.getUserName();
+//			Node user = nodeIndex.get("name", userNm).getSingle();
+//			if(null == user){
+//				log.debug("creating user: "+userNm);
+//				user = repository.createNode();
+//				user.setProperty("name", userNm);
+//				nodeIndex.add(user, "name", userNm);
+//			}
+//			
+//			Node link = repository.createNode();
+//			link.setProperty("url", ((Page) (user2.getPages().toArray()[0])).getUrl());
+//			
+//			Relationship rel1 = user.createRelationshipTo(link,RelTypes.LINKS);
+//			rel1.setProperty("visibility", "public");
+//			
+//			tx.success();
+//			
+//		} finally {
+//			tx.finish();
+//		}
+//	}
 	
 //	@Transactional
 //	public void populateDatabase(Page page) {

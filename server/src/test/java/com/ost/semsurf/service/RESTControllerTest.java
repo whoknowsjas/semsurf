@@ -1,6 +1,6 @@
 package com.ost.semsurf.service;
 
-import com.ost.semsurf.model.Page;
+import com.ost.semsurf.domain.Page;
 
 import static junit.framework.Assert.assertTrue; 
 import static junit.framework.Assert.assertFalse; 

@@ -2,10 +2,10 @@ package com.ost.semsurf.service;
 
 import java.util.List;
 
-import com.ost.semsurf.model.Page;
-import com.ost.semsurf.model.User;
+import com.ost.semsurf.domain.Page;
+import com.ost.semsurf.domain.User;
 import com.ost.semsurf.repository.DBPopulator;
-import com.ost.semsurf.repository.UserRepository;
+import com.ost.semsurf.repository.GraphRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
