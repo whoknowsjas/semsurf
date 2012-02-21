@@ -9,13 +9,13 @@
 									http://www.springframework.org/schema/context 
 									http://www.springframework.org/schema/context/spring-context-3.0.xsd
 									http://www.springframework.org/schema/mvc
-									http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
->
+									http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+">
  
  	<mvc:annotation-driven/>
  	<context:annotation-config/>
  	<context:spring-configured/>
-  	<context:component-scan base-package="com.ost.semsurf" />
+	<context:component-scan base-package="com.ost.semsurf.controller" />
   
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     <property name="mediaTypes">

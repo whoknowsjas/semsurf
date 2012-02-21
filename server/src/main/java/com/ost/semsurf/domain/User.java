@@ -1,49 +1,56 @@
 package com.ost.semsurf.domain;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 
 @NodeEntity
 public class User {
-	@GraphId Long sys_id;
-	@Indexed String userName;
-	@RelatedTo(type = "LINKED",elementClass = Page.class)
-	Set<Page> pages;
+	@GraphId public Long nodeId;
+	
+	@Indexed String name;
+	@RelatedTo(elementClass = Page.class, type = "LINKED") private Set<Page> pages;
+//	@RelatedToVia private Set<Link> links;
 	
 	public User() {}
 
-	public User(String userName) {
-		this.userName = userName;
+	public User(String name, Page[] pages) {
+		this.name = name;	
+		if(null != pages)
+			setPages(new HashSet<Page>(Arrays.asList(pages)));
 	}
-	
-	public Long getSys_id() {
-		return sys_id;
+
+	public String getName() {
+		return name;
 	}
-	public void setSys_id(Long sys_id) {
-		this.sys_id = sys_id;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Set<Page> getPages() {
 		if(null == pages) pages = new HashSet<Page>();
 		return pages;
 	}
-
+	
 	public void setPages(Set<Page> pages) {
 		this.pages = pages;
 	}
-	
-	
+
+//	public void setLinks(Set<Link> links) {
+//		this.links = links;
+//	}
+//	
+//	public Set<Link> getLinks() {
+//		if(null == links) links = new HashSet<Link>();
+//		return links;
+//	}
+
 	
 }

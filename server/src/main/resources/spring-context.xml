@@ -12,21 +12,19 @@
 						http://www.springframework.org/schema/tx 
 						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 ">
- 
- 	<context:annotation-config/>
-    <context:spring-configured/>
- 	<tx:annotation-driven mode="proxy" />
- 	
-	<neo4j:repositories base-package="com.ost.semsurf.repository" />
-	<neo4j:config graphDatabaseService="gds" />
 
-	<bean id="gds" class="org.neo4j.kernel.EmbeddedGraphDatabase" destroy-method="shutdown">
-		<constructor-arg index="0" value="/tmp/gdb" />
-		<constructor-arg index="1">
-			<map><entry key="enable_remote_shell" value="true"/></map>
+	<tx:annotation-driven />
+	
+	<neo4j:config graphDatabaseService="graphDb" />
+	<neo4j:repositories base-package="com.ost.semsurf.repository" />
+	
+	<context:annotation-config/>
+ 	<context:spring-configured/>
+	<context:component-scan base-package="com.ost.semsurf.service" />	
+ 
+ 	<bean id="graphDb" class="org.neo4j.kernel.EmbeddedGraphDatabase" destroy-method="shutdown" lazy-init="false">
+		<constructor-arg>
+			<value>/tmp/gsb</value>
 		</constructor-arg>
 	</bean>
-	
-  
- 
 </beans>

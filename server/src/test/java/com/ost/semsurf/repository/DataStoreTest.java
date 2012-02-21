@@ -33,13 +33,14 @@ public class DataStoreTest {
 	
 	@Autowired Neo4jTemplate template;
 	
-	@Test @Transactional public void testSpringGraphDbSave(){
-		
+	@Test  
+	@Transactional
+	public void testSpringGraphDbSave(){	
 		Page obj = new Page();
 		obj.setUrl("test.com");		
 		template.save(obj);	
 		log.debug("finding");
-		Page retObj = template.findOne(obj.getSys_id(), Page.class);
+		Page retObj = template.findOne(obj.nodeId, Page.class);
 		log.debug("springGraphDbSaveResponse: "+retObj);
 		assertEquals("test.com", retObj.getUrl());
 	}
