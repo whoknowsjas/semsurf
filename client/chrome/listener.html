@@ -3,7 +3,8 @@
   <script type="text/javascript" src="jquery-1.5.1.js"></script>
   <script type="text/javascript" src="jquery.json-2.3.min.js"></script>
   <script type="text/javascript">
-		var sUrl = 'http://localhost:8080/server/service';		
+		var sUrl = 'http://localhost:8080/server/service';	
+		var uGuid = "Jayson";	
 		chrome.extension.onRequest.addListener(function(request) {
 			switch(request.do){
 				case 'c_audit':audit();break;				
@@ -45,9 +46,9 @@
 		}		
 		function sPost(){
 			var items = [];
-			//since localStorage doesn't support a getAll must perform this loop,but ideally this should be handled differently
-			for (var i=0; i<localStorage.length; i++) items[i] = localStorage.getItem(localStorage.key(i));
-			$.ajax({url: sUrl+'/post', type: 'POST', data: "["+items+"]", contentType: "application/json; charset=utf-8", success: function(m) { alert($.toJSON(m)); purge(); }, error: function(m) { alert($.toJSON(m)); }});					
+			for (var i=0; i<localStorage.length; i++) items[i] = localStorage.getItem(localStorage.key(i)); 
+			//$.ajax({url: sUrl+'/post', type: 'POST', data: "["+items+"]", contentType: "application/json; charset=utf-8", success: function(m) { alert($.toJSON(m)); purge(); }, error: function(m) { alert($.toJSON(m)); }});			
+			$.ajax({url: sUrl+'/post2/'+uGuid, type: 'POST', data: "["+items+"]", contentType: "application/json; charset=utf-8", success: function(m) { alert($.toJSON(m)); purge(); }, error: function(m) { alert($.toJSON(m)); }});		
 		}					
   </script>
  </head>
