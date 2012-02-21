@@ -44,5 +44,11 @@ project(':server') {
   test {   
   	testLogging.showStandardStreams = true
   	exclude '**/*IT.*'
-  } 
+  }
+  
+  [jettyRun, jettyRunWar]*.doFirst {
+    httpPort = 9090
+    port = 9090
+	}
+ 
 }
