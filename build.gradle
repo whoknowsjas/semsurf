@@ -1,5 +1,15 @@
 subprojects {
 	apply plugin: 'eclipse-wtp'
+	
+	//GRADLE-1884: override the default output dir
+	eclipse {        
+        classpath {
+        		defaultOutputDir = file('build/classes')
+        }
+  }
+    
+  
+
 }
 
 project(':server') {
@@ -27,7 +37,12 @@ project(':server') {
 		           
 	}
 	
-	test {
-		testLogging.showStandardStreams = true
-	}
+	task integrationTest(type: Test) {   
+  	include '**/*IT.*'
+  }
+   
+  test {   
+  	testLogging.showStandardStreams = true
+  	exclude '**/*IT.*'
+  } 
 }
