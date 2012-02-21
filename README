@@ -14,3 +14,9 @@ git pull origin master
 #Misc
 git rm --> deletes from 
 
+#Force
+git reset --hard HEAD
+git clean -f
+git pull
+
+
