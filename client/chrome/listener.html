@@ -3,20 +3,25 @@
   <script type="text/javascript" src="jquery-1.5.1.js"></script>
   <script type="text/javascript" src="jquery.json-2.3.min.js"></script>
   <script type="text/javascript">
-		var sUrl = 'http://localhost:8080/server/service';	
-		var uGuid = "Jayson";	
-		chrome.extension.onRequest.addListener(function(request) {
+		var sUrl;	
+		var uGuid;	
+		chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 			switch(request.do){
-				case 'c_audit':audit();break;				
-				case 'c_save':save(request);break;
-				case 'c_purge':purge();break;
-				case 's_test':sTest();break;
-				case 's_vpost':sVPost();break;
-				case 's_post':sPost();break;				
-			}	 
-		});		
-		function audit(){
-			for (var key in localStorage) alert(localStorage.getItem(key));				
+				case 'c_init':cInit(request); break;
+				case 'c_audit':audit(); break;				
+				case 'c_save':save(request); break;
+				case 'c_purge':purge(); break;
+				case 's_test':sTest(); break;
+				case 's_vpost':sVPost(); break;
+				case 's_post':sPost(); break;				
+			}	
+			sendResponse({param:uGuid, param1:sUrl}); 
+		});	
+		function cInit(request){uGuid = request.param; sUrl = request.param1;  }	
+		function audit(){			
+			var itemsStr;
+			for (var key in localStorage) itemsStr += localStorage.getItem(key);
+			alert(itemsStr);				
 		}	
 		function save(request){
 			try {
@@ -41,8 +46,9 @@
 			$.ajax({url: sUrl+'/test', type: 'GET', success: function(m) { alert($.toJSON(m)); }, error: function(m) { alert($.toJSON(m)); }});
 		}		
 		function sVPost(){	
-			for (var key in localStorage)
-				$.ajax({url: sUrl+'/vpost', type: 'POST', data: localStorage.getItem(key), contentType: "application/json; charset=utf-8", success: function(m) { alert($.toJSON(m)); }, error: function(m) { alert($.toJSON(m)); }});						
+			var items = [];
+			for (var i=0; i<localStorage.length; i++) items[i] = localStorage.getItem(localStorage.key(i)); 
+			$.ajax({url: sUrl+'/vposts', type: 'POST', data: "["+items+"]", contentType: "application/json; charset=utf-8", success: function(m) { alert($.toJSON(m)); }, error: function(m) { alert($.toJSON(m)); }});						
 		}		
 		function sPost(){
 			var items = [];
