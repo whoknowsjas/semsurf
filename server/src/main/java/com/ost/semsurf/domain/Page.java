@@ -1,17 +1,12 @@
 package com.ost.semsurf.domain;
 
 import java.util.HashSet;
-import static org.neo4j.graphdb.Direction.INCOMING;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Set;
-import java.lang.Long;
 
+import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelatedTo;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
 
 @NodeEntity
 public class Page {
@@ -20,14 +15,8 @@ public class Page {
 
 	@Indexed
 	private String url;
-	// private Map<String, String> metaMap;
 	@RelatedTo(elementClass = Attribute.class, type = "HAS")
 	private Set<Attribute> attributes;
-
-	// @RelatedTo(elementClass = Page.class, type = "HAS")
-	// private Set<Attribute> attributes;
-	// @RelatedToVia(type = "LINKED", direction = INCOMING)
-	// private Link link;
 
 	public Page() {
 	}
@@ -48,33 +37,16 @@ public class Page {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
-	// public Map<String, String> getMetaMap(){
-	// if(metaMap == null) metaMap = new HashMap<String, String>();
-	// return metaMap;
-	// }
-	//
-	// public void setMetaMap(Map<String, String> metaMap){
-	// this.metaMap=metaMap;
-	// }
-
-	// public void setLinks(Iterable<Link> links) {
-	// this.links = links;
-	// }
-	//
-	// public Iterable<Link> getLinks() {
-	// // if(null == links) links = new HashSet<Link>();
-	// return links;
-	// }
-
+	
 	public Set<Attribute> getAttributes() {
-		if (null == attributes) attributes = new HashSet<Attribute>();
+		if (null == attributes)
+			attributes = new HashSet<Attribute>();
 		return attributes;
 	}
 
 	public void setAttributes(Set<Attribute> attributes) {
 		this.attributes = attributes;
-	}	
+	}
 
 	@Override
 	public String toString() {

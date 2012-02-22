@@ -118,8 +118,7 @@ public class DBPopulatorTest {
 		for(Page sPage : repository.getUserByName(this.user.getName()).getPages()){
 			assertTrue("ensure attributes are found",repository.getPage(sPage.nodeId).getAttributes().size() > 0);
 			for(Attribute sAttribute : repository.getPage(sPage.nodeId).getAttributes()){
-				log.info(""+repository.getAttribute(sAttribute.nodeId).toString());
-//				assertEquals(4,repository.getAttribute(sAttribute.nodeId).getValues().size());
+				assertEquals(4,repository.getAttribute(sAttribute.nodeId).getValues().size());
 			}
 		}
 	}
