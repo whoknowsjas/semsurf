@@ -23,8 +23,9 @@
 	<context:component-scan base-package="com.ost.semsurf.service" />	
  
  	<bean id="graphDb" class="org.neo4j.kernel.EmbeddedGraphDatabase" destroy-method="shutdown" lazy-init="false">
-		<constructor-arg>
-			<value>/tmp/gsb</value>
+		<constructor-arg index="0" value="data/semsurf.db" />
+		<constructor-arg index="1">
+			<map><entry key="enable_remote_shell" value="true"/></map>
 		</constructor-arg>
 	</bean>
 </beans>

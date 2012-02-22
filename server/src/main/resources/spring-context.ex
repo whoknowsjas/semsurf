@@ -72,7 +72,7 @@
 	<neo4j:config graphDatabaseService="gds" />
 
 	<bean id="gds" class="org.neo4j.kernel.EmbeddedGraphDatabase" destroy-method="shutdown">
-		<constructor-arg index="0" value="/tmp/gdb" />
+		<constructor-arg index="0" value="data/semsurf.db" />
 		<constructor-arg index="1">
 			<map><entry key="enable_remote_shell" value="true"/></map>
 		</constructor-arg>
