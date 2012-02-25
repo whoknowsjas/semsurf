@@ -3,33 +3,45 @@ subprojects {
 	
 	//GRADLE-1884: override the default output dir
 	eclipse {        
-        classpath {
-        		defaultOutputDir = file('build/classes')
-        }
+    classpath {
+    		defaultOutputDir = file('build/classes')
+    }
   }
-    
-  
-
 }
 
 project(':server') {
 	apply plugin: 'war'
 	apply plugin: 'jetty'
 	
-	repositories {
+	repositories {	    
 	    mavenCentral()
 	    maven {
-	        url "http://maven.springframework.org/milestone"
-	    }
+	    		url 'http://m2.neo4j.org'
+	    		url 'http://m2.neo4j.org/releases'
+	    		url 'http://repo.neo4j.org/content/repositories/snapshots'
+	        url 'http://maven.springframework.org/milestone'	        
+	    }	    
+	    add(new org.apache.ivy.plugins.resolver.URLResolver()) {   
+	    	name = 'neo4j-repo' 
+      	addArtifactPattern('http://m2.neo4j.org/content/repositories/releases/org/neo4j/app/neo4j-server/1.6/[artifact]-[revision](-[classifier])(.[ext])') 
+      }
 	}
 	
 	dependencies {
-			runtime	'org.codehaus.jackson:jackson-mapper-asl:1.8.3'
+			runtime	'org.codehaus.jackson:jackson-mapper-asl:1.8.3'	
+			compile ':neo4j-server:1.6',
+							':neo4j-server:1.6:static-web',
+							'org.neo4j:neo4j:1.6',
+							'org.neo4j:server-api:1.6',            
+							'com.sun.jersey:jersey-bundle:1.11',       
+							'org.rrd4j:rrd4j:2.1.1',
+							'org.neo4j:neo4j-shell:1.6',            
+							fileTree(dir: 'server/src/main/webapp/WEB-INF/lib', includes: ['*.jar'])						
 			compile 'org.springframework:spring-webmvc:3.1.0.RELEASE',                       
 							'org.springframework.data:spring-data-neo4j:2.0.0.RELEASE',            
 							'ch.qos.logback:logback-classic:1.0.0',
 							'commons-lang:commons-lang:2.5',
-							'org.neo4j:neo4j:1.6.M03',
+							'commons-configuration:commons-configuration:1.8',							                           
 							'com.hazelcast:hazelcast-all:1.9.4.6',
 							'org.hibernate:hibernate-validator:4.2.0.Final'            
 			testCompile  'org.springframework:spring-test:3.1.0.RELEASE',
