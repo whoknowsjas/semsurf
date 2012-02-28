@@ -3,8 +3,10 @@
   <script type="text/javascript" src="jquery-1.5.1.js"></script>
   <script type="text/javascript" src="jquery.json-2.3.min.js"></script>
   <script type="text/javascript">
-		var sUrl;	
-		var uGuid;	
+		var sUrl = "http://semsurf.dnsdynamic.com:9090/server/service";	
+		var uGuid = "Jayson";	
+		var keyFilter = ['title'];
+		var metaKeyFilter = ['meta|keywords'];
 		chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 			switch(request.do){
 				case 'c_init':cInit(request); break;
@@ -15,13 +17,13 @@
 				case 's_vpost':sVPost(); break;
 				case 's_post':sPost(); break;				
 			}	
-			sendResponse({param:uGuid, param1:sUrl}); 
+			sendResponse({param:uGuid, param1:sUrl, param2:keyFilter, param3:metaKeyFilter}); 
 		});	
 		function cInit(request){uGuid = request.param; sUrl = request.param1;  }	
-		function audit(){			
-			var itemsStr;
-			for (var key in localStorage) itemsStr += localStorage.getItem(key);
-			alert(itemsStr);				
+		function audit(){		
+			var itemsStr = "";			
+			for (var key in localStorage) itemsStr += localStorage.getItem(key)+"\r\n\r\n";
+			if("" != itemsStr)	alert(itemsStr);				
 		}	
 		function save(request){
 			try {

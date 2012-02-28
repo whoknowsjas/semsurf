@@ -12,6 +12,6 @@
   },
   "content_scripts": [ {
     "matches": ["http://*/*", "https://*/*"], 
-    "js": ["executor.js"]
+    "js": ["jquery-1.5.1.js","executor.js"]
   }]
 }
