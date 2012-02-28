@@ -12,18 +12,16 @@
 									http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 ">
  
+ 	<!-- @Autowire, @Required and @Qualifier annotations -->
+	<context:annotation-config/>
+ 	<!-- registers the @RequestBody and @ResponseBody -->
  	<mvc:annotation-driven/>
- 	<context:annotation-config/>
- 	<context:spring-configured/>
-	<context:component-scan base-package="com.ost.semsurf.controller" />
-  
+ 	
+ 	<context:component-scan base-package="com.ost.semsurf.controller" />
+ 	
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     <property name="mediaTypes">
         <map>
-        <!--
-            <entry key="atom" value="application/atom+xml" />
-            <entry key="html" value="text/html" />
-        -->
             <entry key="json" value="application/json" />
         </map>
     </property>
@@ -35,5 +33,4 @@
        <property name="extractValueFromSingleKeyModel" value="true" />
 	</bean>
   
- 
 </beans>
